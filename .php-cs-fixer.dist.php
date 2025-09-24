@@ -34,5 +34,4 @@ return new Config()
     ])
     ->setCacheFile(__DIR__ . '/var/.php-cs-fixer.cache')
     ->setFinder($finder)
-    ;
-
+;
