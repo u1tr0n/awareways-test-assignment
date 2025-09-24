@@ -1,8 +1,6 @@
 **/*.log
-**/*.md
 **/*.php~
 **/*.dist.php
-**/*.dist
 **/*.cache
 **/._*
 **/.dockerignore
@@ -21,8 +19,6 @@
 **/docker-compose.yml
 **/Dockerfile
 **/Thumbs.db
-.github/
-docs/
 public/bundles/
 tests/
 var/
