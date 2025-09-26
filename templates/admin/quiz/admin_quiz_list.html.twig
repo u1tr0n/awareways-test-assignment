@@ -1,0 +1,39 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Admin Quizzes list{% endblock %}
+
+{% block body %}
+    <div class="row mt-4">
+        <div class="col-12 col-lg-6 mx-auto card">
+            <h1 class="h2 text-center pt-4">Quizzes List</h1>
+            <div class="card-body">
+                <table class="table table-responsive">
+                    <tbody>
+                    {% for quiz in quizzes|default([]) %}
+                        <tr class="row">
+                            <td class="col-9">{{ quiz.title }}</td>
+                            <td class="col-3">
+                                <div class="dropdown w-100">
+                                    <button class="btn btn-primary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        View
+                                    </button>
+                                    <ul class="dropdown-menu w-100">
+                                        <li class="w-100"><a class="dropdown-item text-center" href="{{ path('admin_quiz_view', {id: quiz.id}) }}">Latest</a></li>
+                                        {% for version in quiz.versions %}
+                                        <li class="w-100"><a class="dropdown-item text-center" href="{{ path('admin_quiz_view', {id: quiz.id, version: version.version}) }}">{{ version.version }} <span class="ms-2 badge bg-{{ version.status.bsColor }}">{{ version.status.title }}</span></a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+{#                                <a href="{{ path('admin_quiz_view', {id: quiz.id}) }}" class="btn btn-sm btn-primary w-100">View</a>#}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr><td class="text-danger text-center mb-3">You don't have any quizzes</td></tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,5 @@
+<div class="w-100 d-flex text-center align-content-center justify-content-between mb-4">
+    <button class="btn btn-sm btn-primary ms-2" type="button" {{ stimulus_action('dnd', 'moveLeft', 'click') }}>←</button>
+    <span class="py-2 answer">{{ option.title }}</span>
+    <button class="btn btn-sm btn-primary me-2" type="button" {{ stimulus_action('dnd', 'moveRight', 'click', {id: option.id}) }}>→</button>
+</div>

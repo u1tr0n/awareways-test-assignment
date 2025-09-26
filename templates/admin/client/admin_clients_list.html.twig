@@ -1,0 +1,26 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Admin Clients list{% endblock %}
+
+{% block body %}
+    <div class="row mt-4">
+        <div class="col-12 col-lg-6 mx-auto card">
+            <h1 class="h2 text-center pt-4">Clients List</h1>
+            <div class="card-body">
+                <table class="table table-responsive">
+                    <tbody>
+                    {% for quiz in clients|default([]) %}
+                        <tr class="row">
+                            <td class="col-5">{{ quiz.name }}</td>
+                            <td class="col-7 text-end"><a href="{{ path('app_client_quiz', {id: quiz.id}) }}" target="_blank">{{ url('app_client_quiz', {id: quiz.id}) }}</a></td>
+                        </tr>
+                    {% else %}
+                        <tr><td class="text-danger text-center mb-3">You don't have any clients</td></tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

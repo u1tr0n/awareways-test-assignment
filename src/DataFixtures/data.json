@@ -1,0 +1,480 @@
+{
+    "categories": [
+        {
+            "id": "0199880f-5978-7a3a-811a-cabccb33b9fc",
+            "title": "Confidentiality"
+        },
+        {
+            "id": "0199880f-5978-7f6c-be17-5fecf2f6f7a0",
+            "title": "Integrity"
+        },
+        {
+            "id": "0199880f-5978-7ed4-a428-e753036d5968",
+            "title": "Availability"
+        }
+    ],
+    "tags": [
+        {
+            "id": "01998812-dd19-7b38-96f7-16d63de74e42",
+            "title": "cybersecurity"
+        },
+        {
+            "id": "01998812-dd19-7063-8315-ac4130583acb",
+            "title": "network-security"
+        },
+        {
+            "id": "01998812-dd19-7b76-a363-dbcf72d7896e",
+            "title": "application-security"
+        },
+        {
+            "id": "01998812-dd19-775f-894f-a5d5e5fde629",
+            "title": "web-security"
+        },
+        {
+            "id": "01998812-dd19-77a9-92a1-82c36633f16f",
+            "title": "cryptography"
+        },
+        {
+            "id": "01998812-dd19-779b-a0b1-b70ef21fd42d",
+            "title": "penetration-testing"
+        },
+        {
+            "id": "01998812-dd1a-72de-ad3b-cebbc9825338",
+            "title": "vulnerability-assessment"
+        },
+        {
+            "id": "01998812-dd1a-73ff-a4ef-40d6ca049a43",
+            "title": "incident-response"
+        },
+        {
+            "id": "01998812-dd1a-79fe-9d3f-713b3652dd35",
+            "title": "malware-analysis"
+        },
+        {
+            "id": "01998812-dd1a-7904-82dd-87399ce8d2ff",
+            "title": "authentication"
+        }
+    ],
+    "quizzes": [
+        {
+            "title": "Test Quiz",
+            "status": "published",
+            "version": "1.0.0",
+            "questions": [
+                {
+                    "title": "Q1",
+                    "description": "Question 1 description",
+                    "type": "single_answer",
+                    "meta": [],
+                    "options": [
+                        {
+                            "title": "yes",
+                            "correct": true
+                        },
+                        {
+                            "title": "no",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "title": "Q2",
+                    "description": "Question 2 description",
+                    "type": "multiple_answer",
+                    "meta": [],
+                    "options": [
+                        {
+                            "title": "variant 1",
+                            "correct": true
+                        },
+                        {
+                            "title": "variant 2",
+                            "correct": true
+                        },
+                        {
+                            "title": "variant 3",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "title": "Q3",
+                    "description": "Question 3 description",
+                    "type": "single_answer",
+                    "meta": [],
+                    "options": [
+                        {
+                            "title": "yes",
+                            "correct": true
+                        },
+                        {
+                            "title": "no",
+                            "correct": false
+                        },
+                        {
+                            "title": "maybe",
+                            "correct": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "More Real Quiz #1",
+            "status": "published",
+            "version": "1.0.0",
+            "questions": [
+                {
+                    "title": "What is the main purpose of a firewall?",
+                    "description": "Select the correct answer.",
+                    "type": "single_answer",
+                    "meta": [],
+                    "options": [
+                        { "title": "To filter network traffic", "correct": true },
+                        { "title": "To store files", "correct": false },
+                        { "title": "To speed up the CPU", "correct": false }
+                    ]
+                },
+                {
+                    "title": "Which of the following are common types of malware?",
+                    "description": "Select all that apply.",
+                    "type": "multiple_answer",
+                    "meta": [],
+                    "options": [
+                        { "title": "Viruses", "correct": true },
+                        { "title": "Worms", "correct": true },
+                        { "title": "Cookies", "correct": false },
+                        { "title": "Trojans", "correct": true }
+                    ]
+                },
+                {
+                    "title": "Classify encryption algorithms by category.",
+                    "description": "Drag items into the correct column.",
+                    "type": "drag_and_drop_answer",
+                    "meta": ["Symmetric", "Asymmetric"],
+                    "options": [
+                        { "title": "AES", "correct": true },
+                        { "title": "DES", "correct": true },
+                        { "title": "RSA", "correct": false },
+                        { "title": "ECC", "correct": false }
+                    ]
+                },
+                {
+                    "title": "What does HTTPS stand for?",
+                    "description": "Select one correct answer.",
+                    "type": "single_answer",
+                    "meta": [],
+                    "options": [
+                        { "title": "HyperText Transfer Protocol Secure", "correct": true },
+                        { "title": "Hyper Transfer Text Standard", "correct": false },
+                        { "title": "High Transfer Protocol Security", "correct": false }
+                    ]
+                },
+                {
+                    "title": "Which practices help keep passwords strong?",
+                    "description": "Select all correct answers.",
+                    "type": "multiple_answer",
+                    "meta": [],
+                    "options": [
+                        { "title": "Use at least 12 characters", "correct": true },
+                        { "title": "Include special characters", "correct": true },
+                        { "title": "Reuse passwords across sites", "correct": false },
+                        { "title": "Rotate passwords periodically", "correct": true }
+                    ]
+                },
+                {
+                    "title": "Match attack types to examples.",
+                    "description": "Drag to the correct column.",
+                    "type": "drag_and_drop_answer",
+                    "meta": ["Attack", "Not an attack"],
+                    "options": [
+                        { "title": "SQL Injection", "correct": true },
+                        { "title": "DDoS", "correct": true },
+                        { "title": "Regular software update", "correct": false },
+                        { "title": "Strong password creation", "correct": false }
+                    ]
+                },
+                {
+                    "title": "Which protocol secures email transport?",
+                    "description": "Select one correct answer.",
+                    "type": "single_answer",
+                    "meta": [],
+                    "options": [
+                        { "title": "SMTP over TLS", "correct": true },
+                        { "title": "FTP", "correct": false },
+                        { "title": "HTTP", "correct": false }
+                    ]
+                },
+                {
+                    "title": "Which are valid two-factor authentication methods?",
+                    "description": "Choose all correct answers.",
+                    "type": "multiple_answer",
+                    "meta": [],
+                    "options": [
+                        { "title": "Password + SMS code", "correct": true },
+                        { "title": "PIN only", "correct": false },
+                        { "title": "Fingerprint + password", "correct": true },
+                        { "title": "Username only", "correct": false }
+                    ]
+                },
+                {
+                    "title": "Sort practices as Safe or Unsafe.",
+                    "description": "Drag to the correct column.",
+                    "type": "drag_and_drop_answer",
+                    "meta": ["Safe", "Unsafe"],
+                    "options": [
+                        { "title": "Using a VPN on public Wi-Fi", "correct": true },
+                        { "title": "Applying security patches", "correct": true },
+                        { "title": "Clicking unknown links", "correct": false },
+                        { "title": "Sharing passwords", "correct": false }
+                    ]
+                },
+                {
+                    "title": "What is the purpose of multi-factor authentication?",
+                    "description": "Select one correct answer.",
+                    "type": "single_answer",
+                    "meta": [],
+                    "options": [
+                        { "title": "Increase security via multiple proofs", "correct": true },
+                        { "title": "Speed up logins", "correct": false },
+                        { "title": "Store more passwords", "correct": false }
+                    ]
+                },
+                {
+                    "title": "Which are social engineering techniques?",
+                    "description": "Select all that apply.",
+                    "type": "multiple_answer",
+                    "meta": [],
+                    "options": [
+                        { "title": "Phishing", "correct": true },
+                        { "title": "Baiting", "correct": true },
+                        { "title": "Brute force", "correct": false },
+                        { "title": "Pretexting", "correct": true }
+                    ]
+                },
+                {
+                    "title": "Classify data as Sensitive or Non-sensitive.",
+                    "description": "Drag items into columns.",
+                    "type": "drag_and_drop_answer",
+                    "meta": ["Sensitive", "Non-sensitive"],
+                    "options": [
+                        { "title": "Credit card number", "correct": true },
+                        { "title": "Social Security number", "correct": true },
+                        { "title": "Public company name", "correct": false },
+                        { "title": "Weather forecast", "correct": false }
+                    ]
+                },
+                {
+                    "title": "What does VPN stand for?",
+                    "description": "Select one correct answer.",
+                    "type": "single_answer",
+                    "meta": [],
+                    "options": [
+                        { "title": "Virtual Private Network", "correct": true },
+                        { "title": "Verified Protected Node", "correct": false },
+                        { "title": "Virtual Protected Net", "correct": false }
+                    ]
+                },
+                {
+                    "title": "Which actions reduce phishing risks?",
+                    "description": "Choose all correct answers.",
+                    "type": "multiple_answer",
+                    "meta": [],
+                    "options": [
+                        { "title": "Verify sender address", "correct": true },
+                        { "title": "Use spam filters", "correct": true },
+                        { "title": "Click links without checking", "correct": false },
+                        { "title": "Share passwords via email", "correct": false }
+                    ]
+                },
+                {
+                    "title": "Sort updates into Security vs Non-security.",
+                    "description": "Drag to the correct column.",
+                    "type": "drag_and_drop_answer",
+                    "meta": ["Security", "Non-security"],
+                    "options": [
+                        { "title": "Patch for a vulnerability", "correct": true },
+                        { "title": "Bug fix preventing exploit", "correct": true },
+                        { "title": "New theme pack", "correct": false },
+                        { "title": "UI color change", "correct": false }
+                    ]
+                },
+                {
+                    "title": "What is the strongest Wi-Fi encryption for home use?",
+                    "description": "Select one correct answer.",
+                    "type": "single_answer",
+                    "meta": [],
+                    "options": [
+                        { "title": "WPA3", "correct": true },
+                        { "title": "WEP", "correct": false },
+                        { "title": "WPA2-PSK (TKIP)", "correct": false }
+                    ]
+                },
+                {
+                    "title": "Which are common password attack types?",
+                    "description": "Select all that apply.",
+                    "type": "multiple_answer",
+                    "meta": [],
+                    "options": [
+                        { "title": "Brute force", "correct": true },
+                        { "title": "Dictionary attack", "correct": true },
+                        { "title": "Rainbow table", "correct": true },
+                        { "title": "TLS handshake", "correct": false }
+                    ]
+                },
+                {
+                    "title": "Classify file types by risk when unknown.",
+                    "description": "Drag items to columns.",
+                    "type": "drag_and_drop_answer",
+                    "meta": ["Higher risk", "Lower risk"],
+                    "options": [
+                        { "title": "EXE from email", "correct": true },
+                        { "title": "Office macro document", "correct": true },
+                        { "title": "Plain TXT", "correct": false },
+                        { "title": "JPEG image", "correct": false }
+                    ]
+                },
+                {
+                    "title": "What is the principle of least privilege?",
+                    "description": "Select one correct answer.",
+                    "type": "single_answer",
+                    "meta": [],
+                    "options": [
+                        { "title": "Grant only the access required to do a job", "correct": true },
+                        { "title": "Give everyone admin rights", "correct": false },
+                        { "title": "Hide system logs", "correct": false }
+                    ]
+                },
+                {
+                    "title": "Which are indicators of compromise (IoCs)?",
+                    "description": "Select all correct answers.",
+                    "type": "multiple_answer",
+                    "meta": [],
+                    "options": [
+                        { "title": "Unusual outbound traffic", "correct": true },
+                        { "title": "Unknown processes starting", "correct": true },
+                        { "title": "Expected login from known user", "correct": false },
+                        { "title": "Repeated system crashes", "correct": true }
+                    ]
+                },
+                {
+                    "title": "Match backup types to descriptions.",
+                    "description": "Drag into columns.",
+                    "type": "drag_and_drop_answer",
+                    "meta": ["Backup type", "Not a backup type"],
+                    "options": [
+                        { "title": "Full backup", "correct": true },
+                        { "title": "Incremental backup", "correct": true },
+                        { "title": "Differential backup", "correct": true },
+                        { "title": "Disk defragmentation", "correct": false }
+                    ]
+                },
+                {
+                    "title": "Which tool captures and inspects network packets?",
+                    "description": "Select one correct answer.",
+                    "type": "single_answer",
+                    "meta": [],
+                    "options": [
+                        { "title": "Wireshark", "correct": true },
+                        { "title": "Photoshop", "correct": false },
+                        { "title": "Excel", "correct": false }
+                    ]
+                },
+                {
+                    "title": "Which are good email security practices?",
+                    "description": "Select all correct answers.",
+                    "type": "multiple_answer",
+                    "meta": [],
+                    "options": [
+                        { "title": "Avoid unknown attachments", "correct": true },
+                        { "title": "Use digital signatures", "correct": true },
+                        { "title": "Share passwords freely", "correct": false },
+                        { "title": "Check for encryption", "correct": true }
+                    ]
+                },
+                {
+                    "title": "Match terms to meanings.",
+                    "description": "Drag items to the right column.",
+                    "type": "drag_and_drop_answer",
+                    "meta": ["Security term", "Unrelated"],
+                    "options": [
+                        { "title": "CIA triad", "correct": true },
+                        { "title": "IDS", "correct": true },
+                        { "title": "IPS", "correct": true },
+                        { "title": "JPEG compression level", "correct": false }
+                    ]
+                },
+                {
+                    "title": "What is social engineering?",
+                    "description": "Select one correct answer.",
+                    "type": "single_answer",
+                    "meta": [],
+                    "options": [
+                        { "title": "Manipulating people to reveal information", "correct": true },
+                        { "title": "Installing firewalls on servers", "correct": false },
+                        { "title": "Encrypting hard drives", "correct": false }
+                    ]
+                },
+                {
+                    "title": "Which practices protect mobile devices?",
+                    "description": "Select all correct answers.",
+                    "type": "multiple_answer",
+                    "meta": [],
+                    "options": [
+                        { "title": "Use screen lock", "correct": true },
+                        { "title": "Enable device encryption", "correct": true },
+                        { "title": "Install apps from unknown sources", "correct": false },
+                        { "title": "Disable OS updates", "correct": false }
+                    ]
+                },
+                {
+                    "title": "Classify network ports as Common or Other.",
+                    "description": "Drag items into columns.",
+                    "type": "drag_and_drop_answer",
+                    "meta": ["Common ports", "Other"],
+                    "options": [
+                        { "title": "80 HTTP", "correct": true },
+                        { "title": "443 HTTPS", "correct": true },
+                        { "title": "22 SSH", "correct": true },
+                        { "title": "6666 Custom service", "correct": false }
+                    ]
+                },
+                {
+                    "title": "What is the role of antivirus software?",
+                    "description": "Select one correct answer.",
+                    "type": "single_answer",
+                    "meta": [],
+                    "options": [
+                        { "title": "Detect and remove malware", "correct": true },
+                        { "title": "Store backups", "correct": false },
+                        { "title": "Increase internet speed", "correct": false }
+                    ]
+                },
+                {
+                    "title": "Which are physical security controls?",
+                    "description": "Select all correct answers.",
+                    "type": "multiple_answer",
+                    "meta": [],
+                    "options": [
+                        { "title": "Security cameras", "correct": true },
+                        { "title": "Biometric locks", "correct": true },
+                        { "title": "Firewalls", "correct": false },
+                        { "title": "On-site guards", "correct": true }
+                    ]
+                },
+                {
+                    "title": "Classify network devices by function.",
+                    "description": "Drag items into columns.",
+                    "type": "drag_and_drop_answer",
+                    "meta": ["Security-focused", "General networking"],
+                    "options": [
+                        { "title": "Firewall", "correct": true },
+                        { "title": "IPS appliance", "correct": true },
+                        { "title": "Switch", "correct": false },
+                        { "title": "Unmanaged hub", "correct": false }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,90 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Admin Question Options list{% endblock %}
+
+{% block body %}
+    <div class="row mt-4">
+        <div class="col-12 col-lg-6 mx-auto card">
+            <div class="card-body text-center">{{ question.title }}
+                <span class="badge ms-2 bg-{{ question.type.bsColor }}">{{ question.type.title }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12 col-lg-6 mx-auto card">
+            <h1 class="h2 text-center pt-4">Options List</h1>
+            <div class="card-body">
+                <table class="table table-responsive">
+                    <tbody>
+                    {% set optionsCount = question.options.count %}
+                    {% for key, option in question.options|default([]) %}
+                        <tr class="row">
+                            <td class="col-6">{{ option.option.title }}{% if option.option.correct %}<span class="badge bg-success ms-3">Correct</span>{% else %}<span class="badge bg-danger ms-3">Not Correct</span>{% endif %}</td>
+                            <td class="col-6 d-flex justify-content-end">
+                                <a href="{{ path('admin_options_edit', {
+                                    quizId: quiz,
+                                    version: version,
+                                    questionId: question.id,
+                                    optionId: option.option.id,
+                                }) }}" class="btn btn-sm btn-primary">Edit</a>
+                                {% set modalId = 'confirm-remove-option-' ~ option.option.id %}
+                                <button type="button" class="btn btn-danger btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#{{ modalId }}Modal">
+                                    Delete
+                                </button>
+                                <div class="modal fade" id="{{ modalId }}Modal" tabindex="-1" aria-labelledby="{{ modalId }}ModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5 text-center" id="{{ modalId }}ModalLabel">Remove Question Option?</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure you want to <span class="text-danger">DELETE</span> option <span class="text-danger">{{ option.option.title }}</span> from Question?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form class="" action="{{ path('admin_options_remove', {}) }}" method="POST">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <input type="hidden" name="quizId" value="{{ quiz }}">
+                                                    <input type="hidden" name="questionId" value="{{ question.id }}">
+                                                    <input type="hidden" name="optionId" value="{{ option.option.id }}">
+                                                    <input type="hidden" name="version" value="{{ version }}">
+                                                    <button type="submit" class="btn btn-danger">Remove</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="btn-group btn-group-sm" role="group" aria-label="UpDown">
+                                    <form action="{{ path('admin_quiz_options_swap') }}" method="post">
+                                        <button type="submit" class="btn btn-sm btn-primary ms-1" {% if key == 0 %}disabled="disabled"{% endif %}>Move Up</button>
+                                        <input type="hidden" name="option1" value="{{ option.option.id }}">
+                                        {% if key > 0 %}<input type="hidden" name="option2" value="{{ question.options[key - 1].option.id }}">{% endif %}
+                                        <input type="hidden" name="quizId" value="{{ quiz }}">
+                                        <input type="hidden" name="version" value="{{ version }}">
+                                        <input type="hidden" name="questionId" value="{{ question.id }}">
+                                    </form>
+                                    <form action="{{ path('admin_quiz_options_swap') }}" method="post">
+                                        <button type="submit" class="btn btn-sm btn-primary ms-1" {% if key >= (optionsCount - 1) %}disabled="disabled"{% endif %}>Move Down</button>
+                                        <input type="hidden" name="option1" value="{{ option.option.id }}">
+                                        {% if key < (optionsCount - 1) %}<input type="hidden" name="option2" value="{{ question.options[key + 1].option.id }}">{% endif %}
+                                        <input type="hidden" name="quizId" value="{{ quiz }}">
+                                        <input type="hidden" name="version" value="{{ version }}">
+                                        <input type="hidden" name="questionId" value="{{ question.id }}">
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr><td class="text-danger text-center mb-3">You don't have any Option</td></tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="text-center">
+                    <a href="{{ path('admin_options_add', {quizId: quiz, version: version, questionId: question.id}) }}" class="btn btn-success mb-3">Add Option</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mt-3"><a href="{{ path('admin_quiz_view', {id: quiz, version: version}) }}" class="btn btn-primary px-4">Back to Quiz</a></div>
+{% endblock %}

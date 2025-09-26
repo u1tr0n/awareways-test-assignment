@@ -1,0 +1,12 @@
+{% extends 'admin_base.html.twig' %}
+{% block body %}
+    <div class="col-12 col-lg-7 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                {% if form|default(false) %}
+                    {{ form(form) }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

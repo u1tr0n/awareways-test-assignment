@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome to the Quizzes{% endblock %}
+
+{% block body %}
+    {% if quiz is null %}
+        <div class="row mt-4 mt-5 pt-5">
+            <div class="col-12 col-lg-6 mx-auto card border-success py-5">
+                <h1 class="text-center h1 text-success py-5">🎉 &nbsp;Quiz Completed&nbsp; 🎉</h1>
+            </div>
+        </div>
+    {% else %}
+        {% set dndQuestionType = enum('App\\Enum\\QuestionType').DRAG_AND_DROP_ANSWER.value %}
+        <div class="row mt-4" {{ stimulus_controller('dnd') }}>
+            <div class="col-12 col-lg-6 mx-auto card">
+                <div class="py-3 text-center d-flex align-content-center justify-content-center">Question {{ quiz.answersCount + 1 }} / {{ quiz.questionsCount }}</div>
+                <div class="py-3 text-center d-flex align-content-center justify-content-center">{{ quiz.client.name|capitalize }} <span class="badge bg-primary ms-2">{{ quiz.client.version }}</span></div>
+                <hr class="table-group-divider"/>
+                <form class="card-body" method="post" action="{{ path('app_client_quiz_answer', {id: quiz.client.id}) }}">
+                    <h4 class="text-center">{{ quiz.question.title }}</h4>
+                    <div class="text-center text-muted mt-4">{{ quiz.question.description }} ({{ quiz.question.type.title }})</div>
+                    {% if quiz.question.type.value == dndQuestionType %}
+                    <div class="row mt-3">
+                        <div class="col-4 px-1">
+                            <div class="card">
+                                <h4 class="text-center">{{ quiz.question.meta[0] }}</h4>
+                                <div class="variants" {{ stimulus_target('dnd', 'leftColumn') }}></div>
+                            </div>
+                        </div>
+                        <div class="col-4 px-1">
+                            <div class="card">
+                                <h4 class="text-center">&nbsp;</h4>
+                                <div class="variants" {{ stimulus_target('dnd', 'variant') }}>
+                    {% endif %}
+                    {% for option in quiz.options %}
+                        {% include 'components/option/' ~ quiz.question.type.value ~ '.html.twig' %}
+                    {% endfor %}
+                    {% if quiz.question.type.value == dndQuestionType %}
+                                </div>
+                                </div>
+                            </div>
+                            <div class="col-4 px-1">
+                                <div class="card">
+                                    <h4 class="text-center">{{ quiz.question.meta[1] }}</h4>
+                                    <div class="variants"  {{ stimulus_target('dnd', 'rightColumn') }}></div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <input type="hidden" name="question" value="{{ quiz.question.id }}">
+                    <div class="text-center">
+                        <button
+                            {{ stimulus_target('dnd', 'btn') }}
+                            class="btn btn-primary px-5 mt-3"
+                            {% if quiz.question.type.value == dndQuestionType %}disabled="disabled"{% endif %}
+                        >Next</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

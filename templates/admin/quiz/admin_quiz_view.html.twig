@@ -1,0 +1,197 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Admin Quiz "{{ quiz.quiz.title }}"{% endblock %}
+
+{% block body %}
+    <div class="row mt-4 mx-1">
+        <div class="col-12 col-lg-9 p-1">
+            <div class="card">
+                <div class="text-center">
+                    <h1 class="h4 text-center mt-2 d-inline-block">{{ quiz.quiz.title }}</h1>
+                    <span class="ms-2 badge bg-success d-inline-block">{{ quiz.version }}</span>
+                    <span class="ms-2 badge bg-{{ quiz.status.bsColor }} d-inline-block">{{ quiz.status.title }}</span>
+                </div>
+                <table class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Type</th>
+                            <th colspan="4" class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% set questionsCount = quiz.quizQuestions.count %}
+
+                    {% for key, quizQuestion in quiz.quizQuestions %}
+                        {% set optionsCount = quizQuestion.question.options.count %}
+
+                    <tr>
+                        <td>
+                            <div>{{ quizQuestion.question.title }}</div>
+                            {% if quizQuestion.question.category is not null %}
+                                <div class="category">{{ quizQuestion.question.category.title }}</div>
+                            {% endif %}
+                            {% if quizQuestion.question.tags.count > 0 %}
+                            <ul class="tags-list">
+                                {% for tag in quizQuestion.question.tags %}
+                                    <li class="me-1 badge bg-primary">{{ tag.title }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </td>
+                        <td><span class="badge bg-{{ quizQuestion.question.type.bsColor }}">{{ quizQuestion.question.type.title }}</span></td>
+                        <td class="text-end"><a href="{{ path('admin_options_list', {quizId: quiz.quiz.id, questionId: quizQuestion.question.id, version: quiz.version}) }}" class="btn btn-sm btn-success">View Options <span class="badge bg-success-subtle ms-1">{{ optionsCount }}</span></a></td>
+                        <td class="text-end"><a href="{{ path('admin_quiz_edit_question', {id: quizQuestion.question.id, quizId: quiz.id}) }}" class="btn btn-sm btn-primary">Edit Question</a></td>
+                        <td class="text-end">
+                            {% set modalId = 'confirm-remove-question-' ~ quizQuestion.question.id %}
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#{{ modalId }}Modal">
+                                Delete Question
+                            </button>
+                            <div class="modal fade" id="{{ modalId }}Modal" tabindex="-1" aria-labelledby="{{ modalId }}ModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5 text-center" id="{{ modalId }}ModalLabel">Remove Question from Quiz?</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to <span class="text-danger">DELETE</span> question <span class="text-danger">{{ quizQuestion.question.title }}</span> from quiz?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form class="" action="{{ path('admin_quiz_question_remove') }}" method="POST">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <input type="hidden" name="quizId" value="{{ quiz.id }}">
+                                                <input type="hidden" name="questionId" value="{{ quizQuestion.question.id }}">
+                                                <button type="submit" class="btn btn-danger">DELETE QUESTION</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-end">
+                            <div class="btn-group btn-group-sm" role="group" aria-label="UpDown">
+                                <form action="{{ path('admin_quiz_questions_swap') }}" method="post">
+                                    <button type="submit" class="btn btn-sm btn-primary" {% if key == 0 %}disabled="disabled"{% endif %}>Move Up</button>
+                                    <input type="hidden" name="question1" value="{{ quizQuestion.question.id }}">
+                                    {% if key > 0 %}<input type="hidden" name="question2" value="{{ quiz.quizQuestions[key - 1].question.id }}">{% endif %}
+                                    <input type="hidden" name="quizId" value="{{ quiz.quiz.id }}">
+                                    <input type="hidden" name="version" value="{{ quiz.version }}">
+                                </form>
+                                <form action="{{ path('admin_quiz_questions_swap') }}" method="post">
+                                    <button type="submit" class="btn btn-sm btn-primary ms-1" {% if key >= (questionsCount - 1) %}disabled="disabled"{% endif %}>Move Down</button>
+                                    <input type="hidden" name="question1" value="{{ quizQuestion.question.id }}">
+                                    {% if key < (questionsCount - 1) %}<input type="hidden" name="question2" value="{{ quiz.quizQuestions[key + 1].question.id }}">{% endif %}
+                                    <input type="hidden" name="quizId" value="{{ quiz.quiz.id }}">
+                                    <input type="hidden" name="version" value="{{ quiz.version }}">
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6" class="text-center text-danger">This Quiz didn't have any question...</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="text-center">
+                    <a href="{{ path('admin_quiz_add_question', {quizId: quiz.id}) }}" class="btn btn-success mb-3">Add Question</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-3 p-1">
+            <div class="card">
+                <h2 class="h5 mt-2 text-center">Actions</h2>
+                <div class="card-body">
+                    <div class="dropdown w-100 mb-2">
+                        <button class="btn btn-primary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Other Versions
+                        </button>
+                        <ul class="dropdown-menu w-100">
+                            <li class="w-100"><a class="dropdown-item text-center" href="{{ path('admin_quiz_view', {id: quiz.quiz.id}) }}">Latest</a></li>
+                            {% for version in quiz.quiz.versions %}
+                                <li class="w-100"><a class="dropdown-item text-center{% if quiz.id == version.id %} active{% endif %}" href="{{ path('admin_quiz_view', {id: quiz.quiz.id, version: version.version}) }}">{{ version.version }} <span class="ms-2 badge bg-{{ version.status.bsColor }}">{{ version.status.title }}</span></a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+{#                    {% if quiz.status.draft == false %}#}
+                    <a href="{{ path('admin_client_create', {quizVersionId: quiz.id }) }}" class="btn btn-success w-100 mb-2">Create Client Quiz</a>
+{#                    {% endif %}#}
+                    <button type="button" class="btn btn-danger w-100 mb-2" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal">
+                        Delete
+                    </button>
+                    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content border-danger">
+                                <div class="modal-header border-danger">
+                                    <h1 class="modal-title fs-5 text-danger text-center" id="deleteConfirmationModalLabel">Delete Quiz?</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body border-danger">
+                                    This operation cannot be undone! Are you sure you want to delete this quiz?
+                                </div>
+                                <div class="modal-footer border-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-danger">DELETE</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if quiz.status.draft %}
+                    <button type="button" class="btn btn-danger w-100 mb-2" data-bs-toggle="modal" data-bs-target="#publishConfirmationModal">
+                        Publish
+                    </button>
+                    <div class="modal fade" id="publishConfirmationModal" tabindex="-1" aria-labelledby="publishConfirmationModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5 text-center" id="publishConfirmationModalLabel">Publish Quiz?</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to <span class="text-success">publish</span> this version of quiz?
+                                </div>
+                                <div class="modal-footer">
+                                    <form class="" action="{{ path('admin_quiz_change_status') }}" method="POST">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <input type="hidden" name="id" value="{{ quiz.id }}">
+                                        <input type="hidden" name="isDraft" value="{{ quiz.status.draft ? '0' : '1' }}">
+                                        <button type="submit" class="btn btn-danger">PUBLISH</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <button type="button" class="btn btn-danger w-100 mb-2" data-bs-toggle="modal" data-bs-target="#draftConfirmationModal">
+                        Set as Draft
+                    </button>
+                    <div class="modal fade" id="draftConfirmationModal" tabindex="-1" aria-labelledby="draftConfirmationModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5 text-center" id="publishConfirmationModalLabel">Set as Draft this Quiz?</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to <span class="text-success">Set as Draft</span> this version of quiz?
+                                </div>
+                                <div class="modal-footer">
+                                    <form class="" action="{{ path('admin_quiz_change_status') }}" method="POST">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <input type="hidden" name="id" value="{{ quiz.id }}">
+                                        <input type="hidden" name="isDraft" value="{{ quiz.status.draft ? '0' : '1' }}">
+                                        <button type="submit" class="btn btn-danger">Set as Draft</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
