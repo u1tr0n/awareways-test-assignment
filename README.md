@@ -12,6 +12,7 @@
 ```shell
   cd ./project-dir
   git clone git@github.com:u1tr0n/awareways-test-assignment.git
+  cd awareways-test-assignment
 ```
 
 2. Run Command
@@ -20,21 +21,25 @@
 ```
 to build fresh images
 
-3. Run Command
-```shell
-    npm run watch
-```
-to build js and styles
-
-4. Run
+3. Run
 ```shell
     docker compose up --wait
 ```
 to start containers
 
+4. Run Command
+```shell
+    npm install
+    npm run dev
+```
+to build js and styles
+
 5. Load some initial quizzes
 
 `Run commands inside container in /app folder`
+
+to enter container shell run
+`docker exec -it <container_name> /bin/sh`
 ```shell
   bin/scripts/fixtures.sh
 ```
