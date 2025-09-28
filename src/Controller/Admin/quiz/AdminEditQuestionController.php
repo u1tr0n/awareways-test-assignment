@@ -40,8 +40,8 @@ class AdminEditQuestionController extends AbstractController
                     $questionDto = $form->getData();
 
                     if ($form->has('leftColumnTitle') && $form->has('rightColumnTitle')) {
-                        $leftColumnTitle = $form->get('leftColumnTitle')?->getData();
-                        $rightColumnTitle = $form->get('rightColumnTitle')?->getData();
+                        $leftColumnTitle = $form->get('leftColumnTitle')->getData();
+                        $rightColumnTitle = $form->get('rightColumnTitle')->getData();
 
                         if (is_string($leftColumnTitle) && is_string($rightColumnTitle)) {
                             /** @var array<array-key, non-empty-string> $meta */
