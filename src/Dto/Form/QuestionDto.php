@@ -18,7 +18,7 @@ final class QuestionDto
      * @param string $description
      * @param QuestionType $type
      * @param Collection<int, Tag> $tags
-     * @param array<array-key, string> $meta
+     * @param array<array-key, non-empty-string> $meta
      * @param Category|null $category
      */
     public function __construct(
