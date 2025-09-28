@@ -115,9 +115,9 @@
                             {% endfor %}
                         </ul>
                     </div>
-{#                    {% if quiz.status.draft == false %}#}
+                    {% if quiz.status.draft == false %}
                     <a href="{{ path('admin_client_create', {quizVersionId: quiz.id }) }}" class="btn btn-success w-100 mb-2">Create Client Quiz</a>
-{#                    {% endif %}#}
+                    {% endif %}
                     <button type="button" class="btn btn-danger w-100 mb-2" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal">
                         Delete
                     </button>
