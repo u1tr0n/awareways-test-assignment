@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Dto\Form\QuestionDto;
 use App\Entity\Category;
-use App\Entity\Question;
 use App\Entity\Tag;
 use App\Enum\QuestionType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -22,6 +21,8 @@ class QuestionForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        /** @var QuestionDto $question */
+        $question = $builder->getData();
         $builder
             ->add('title', TextType::class, [
                 'required' => true,
@@ -45,13 +46,38 @@ class QuestionForm extends AbstractType
                 'choice_label' => 'getTitle',
                 'required' => false,
             ])
-            ->add('tags', EntityType::class, [
-                'class' => Tag::class,
-                'choice_label' => 'title',
-                'multiple' => true,
-                'expanded' => true,
-                'by_reference' => false,
-            ])
+        ;
+
+        if ($question->type->value === QuestionType::DRAG_AND_DROP_ANSWER->value) {
+            $builder
+                ->add('leftColumnTitle', TextType::class, [
+                    'required' => true,
+                    'mapped' => false,
+                    'data' => $question->meta[0] ?? '',
+                    'attr' => [
+                        'placeholder' => 'Left Column Title',
+                        'autofocus' => true,
+                    ],
+                ])
+                ->add('rightColumnTitle', TextType::class, [
+                    'required' => true,
+                    'mapped' => false,
+                    'data' => $question->meta[1] ?? '',
+                    'attr' => [
+                        'placeholder' => 'Right Column Title',
+                        'autofocus' => true,
+                    ],
+                ])
+            ;
+        }
+
+        $builder->add('tags', EntityType::class, [
+            'class' => Tag::class,
+            'choice_label' => 'title',
+            'multiple' => true,
+            'expanded' => true,
+            'by_reference' => false,
+        ])
             ->add('save', SubmitType::class, [
                 'label' => 'Save Changes',
                 'attr' => [

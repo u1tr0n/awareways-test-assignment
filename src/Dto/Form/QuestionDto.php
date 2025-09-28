@@ -18,6 +18,7 @@ final class QuestionDto
      * @param string $description
      * @param QuestionType $type
      * @param Collection<int, Tag> $tags
+     * @param array<array-key, string> $meta
      * @param Category|null $category
      */
     public function __construct(
@@ -26,6 +27,7 @@ final class QuestionDto
         public string $description,
         public QuestionType $type,
         public Collection $tags,
+        public array $meta,
         public ?Category $category = null,
     ) {}
 
@@ -37,6 +39,7 @@ final class QuestionDto
             description: $question->getDescription(),
             type: $question->getType(),
             tags: $question->getTags(),
+            meta: $question->getMeta(),
             category: $question->getCategory(),
         );
     }
@@ -49,6 +52,7 @@ final class QuestionDto
             description: '',
             type: QuestionType::SINGLE_ANSWER,
             tags: new ArrayCollection(),
+            meta: [],
             category: null,
         );
     }
@@ -60,6 +64,7 @@ final class QuestionDto
             ->setDescription($this->description)
             ->setType($this->type)
             ->setCategory($this->category)
+            ->setMeta($this->meta)
             ->clearTags()
         ;
         foreach ($this->tags as $tag) {

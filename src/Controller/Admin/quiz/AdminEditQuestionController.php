@@ -39,6 +39,13 @@ class AdminEditQuestionController extends AbstractController
                     /** @var QuestionDto $questionDto */
                     $questionDto = $form->getData();
 
+                    $leftColumnTitle = $form->get('leftColumnTitle')->getData();
+                    $rightColumnTitle = $form->get('rightColumnTitle')->getData();
+
+                    if ($leftColumnTitle && $rightColumnTitle) {
+                        $questionDto->meta = [$leftColumnTitle, $rightColumnTitle];
+                    }
+
                     $result = $quizService->updateQuestion(
                         quizVersionId: $quizId,
                         targetQuestionId: $id,
